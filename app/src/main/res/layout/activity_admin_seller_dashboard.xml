@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Título principal -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Panel de Control (Admin / Vendedor)"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Módulos de gestión y reportes requeridos"
+            android:textColor="#FF6D00"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Sección Administrador -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rol Administrador"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btnAdminUsers"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="#1E1E1E"
+            android:text="Gestión de Usuarios (CRUD)"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btnAdminReports"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="#1E1E1E"
+            android:text="Reporte General de Ventas"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Sección Vendedor -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rol Vendedor"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btnSellerProducts"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="#1E1E1E"
+            android:text="Panel de Productos (CRUD Vendedor)"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btnSellerOrders"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="#1E1E1E"
+            android:text="Historial de Pedidos Recibidos"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Botón para volver -->
+        <Button
+            android:id="@+id/btnBackToCatalog"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:backgroundTint="#FF6D00"
+            android:text="Volver al Catálogo (Comprador)"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+</ScrollView>

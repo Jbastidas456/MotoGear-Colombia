@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Título -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dirección de Envío"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona tu ubicación de entrega en el mapa"
+        android:textColor="#FF6D00"
+        android:textSize="14sp"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Simulación del Mapa (Contenedor visual) -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="#1E1E1E"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="[ Mapa GPS simulado: Bogotá / Funza ]"
+            android:textColor="#B0B0B0"
+            android:textSize="14sp"/>
+    </FrameLayout>
+
+    <!-- Campo de texto para dirección escrita -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#1E1E1E"
+        android:hint="Ej: Calle 80 # 94 - Coorporativa"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#777777"
+        android:paddingHorizontal="16dp"
+        android:layout_marginBottom="24dp"
+        android:inputType="textPostalAddress"/>
+
+    <!-- Botón para continuar al pago -->
+    <Button
+        android:id="@+id/btnProceedToPayment"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:backgroundTint="#FF6D00"
+        android:text="Confirmar Dirección y Pagar"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

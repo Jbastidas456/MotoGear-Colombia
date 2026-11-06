@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_dark"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Encabezado / Logo -->
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+            android:contentDescription="Logo MotoGear"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Bienvenido a MotoGear"
+            android:textColor="@color/text_white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Inicia sesión para continuar"
+            android:textColor="@color/text_gray"
+            android:textSize="14sp" />
+
+        <!-- Campo Correo -->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/card_dark"
+            android:hint="Correo Electrónico"
+            android:inputType="textEmailAddress"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/text_white"
+            android:textColorHint="@color/text_gray" />
+
+        <!-- Campo Contraseña -->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/card_dark"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/text_white"
+            android:textColorHint="@color/text_gray" />
+
+        <!-- Botón Iniciar Sesión -->
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/accent_orange"
+            android:text="INICIAR SESIÓN"
+            android:textColor="@color/text_white"
+            android:textStyle="bold" />
+
+        <!-- Botón Biometría (Huella) -->
+        <Button
+            android:id="@+id/btnBiometric"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:text="Ingresar con Huella / Biometría"
+            android:textColor="@color/text_white" />
+
+        <!-- Enlace Recuperar Contraseña -->
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="¿Olvidaste tu contraseña?"
+            android:textColor="@color/accent_orange"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</ScrollView>
