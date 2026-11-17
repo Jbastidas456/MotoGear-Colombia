@@ -50,6 +50,7 @@
             android:layout_marginBottom="4dp"/>
 
         <TextView
+            android:id="@+id/tvProfileRole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cliente Verificado - Rol Comprador"
@@ -76,9 +77,10 @@
                 android:layout_marginBottom="2dp"/>
 
             <TextView
+                android:id="@+id/tvProfileEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="comprador@motogear.com.co"
+                android:text="cargando@motogear.com.co"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:layout_marginBottom="12dp"/>
@@ -99,7 +101,7 @@
                 android:textSize="15sp"/>
         </LinearLayout>
 
-        <!-- Botón de Acceso Rápido a Panel Admin / Vendedor -->
+        <!-- Botón de Acceso Rápido a Panel Admin (Oculto para clientes) -->
         <Button
             android:id="@+id/btnOpenDashboard"
             android:layout_width="match_parent"
@@ -109,6 +111,7 @@
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:visibility="gone"
             android:layout_marginTop="8dp"/>
 
         <!-- Botón de Cerrar Sesión -->

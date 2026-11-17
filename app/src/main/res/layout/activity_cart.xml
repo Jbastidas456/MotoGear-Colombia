@@ -14,44 +14,45 @@
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="16dp"/>
 
-    <!-- Resumen del producto en el carrito -->
+    <!-- Lista dinámica de productos en el carrito -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCartItems"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Total General -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1E1E1E"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="16dp"
-        android:layout_marginBottom="24dp">
+        android:layout_marginBottom="16dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Casco Integral LS2 FF353"
+            android:layout_weight="1"
+            android:text="Total a Pagar:"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp"/>
+            android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/tvCartTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cantidad: 1"
-            android:textColor="#B0B0B0"
-            android:textSize="14sp"
-            android:layout_marginBottom="8dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total: $ 480.000 COP"
+            android:text="$ 0.0 COP"
             android:textColor="#FF6D00"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <!-- Botón para ir al siguiente paso (Geolocalización / Envío) -->
+    <!-- Botón para continuar al envío -->
     <Button
         android:id="@+id/btnProceedToCheckout"
         android:layout_width="match_parent"
@@ -60,6 +61,16 @@
         android:text="Continuar con la Dirección de Envío"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Botón para volver al catálogo a seguir agregando -->
+    <Button
+        android:id="@+id/btnContinueShopping"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Seguir Comprando"
+        android:textColor="#FFFFFF"/>
 
 </LinearLayout>

@@ -36,7 +36,7 @@
             android:id="@+id/txtProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Casco Integral LS2 FF353"
+            android:text="Nombre del Producto"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -47,10 +47,20 @@
             android:id="@+id/txtProductPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$ 480.000 COP"
+            android:text="$ 0.0 COP"
             android:textColor="#FF6D00"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Stock disponible -->
+        <TextView
+            android:id="@+id/txtProductStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disponibles: 0"
+            android:textColor="#AAAAAA"
+            android:textSize="14sp"
             android:layout_marginBottom="16dp"/>
 
         <!-- Descripción -->
@@ -64,9 +74,10 @@
             android:layout_marginBottom="4dp"/>
 
         <TextView
+            android:id="@+id/txtProductDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Casco aerodinámico con certificación internacional ECE 22.05. Interior desmontable y lavable, visor antirrayas preparado para Pinlock y sistema de ventilación superior e inferior."
+            android:text="Descripción detallada"
             android:textColor="#B0B0B0"
             android:textSize="14sp"
             android:layout_marginBottom="32dp"/>

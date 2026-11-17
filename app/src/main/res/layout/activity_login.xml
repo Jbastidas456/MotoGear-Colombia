@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:contentDescription="Logo MotoGear"
             android:src="@mipmap/ic_launcher" />
 
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Inicia sesión para continuar"
+            android:text="Inicia sesión o regístrate para continuar"
             android:textColor="@color/text_gray"
             android:textSize="14sp" />
 
@@ -42,7 +42,7 @@
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="28dp"
             android:background="@color/card_dark"
             android:hint="Correo Electrónico"
             android:inputType="textEmailAddress"
@@ -55,23 +55,44 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="14dp"
             android:background="@color/card_dark"
-            android:hint="Contraseña"
+            android:hint="Contraseña (mín. 6 caracteres)"
             android:inputType="textPassword"
             android:paddingHorizontal="16dp"
             android:textColor="@color/text_white"
             android:textColorHint="@color/text_gray" />
+
+        <!-- Selector de Rol al Registrarse -->
+        <CheckBox
+            android:id="@+id/cbIsAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Registrarme como Administrador / Vendedor"
+            android:textColor="@color/text_white"
+            android:buttonTint="@color/accent_orange" />
 
         <!-- Botón Iniciar Sesión -->
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="@color/accent_orange"
             android:text="INICIAR SESIÓN"
             android:textColor="@color/text_white"
+            android:textStyle="bold" />
+
+        <!-- Botón Crear Cuenta con Rol -->
+        <Button
+            android:id="@+id/btnRegister"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="CREAR CUENTA NUEVA"
+            android:textColor="@color/accent_orange"
             android:textStyle="bold" />
 
         <!-- Botón Biometría (Huella) -->
@@ -80,7 +101,7 @@
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="Ingresar con Huella / Biometría"
             android:textColor="@color/text_white" />
 
@@ -89,7 +110,7 @@
             android:id="@+id/tvForgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="18dp"
             android:text="¿Olvidaste tu contraseña?"
             android:textColor="@color/accent_orange"
             android:textSize="14sp" />
