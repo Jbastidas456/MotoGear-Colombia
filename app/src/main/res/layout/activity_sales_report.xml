@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="#121212"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/btnBackReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Volver al Panel"
+            android:paddingVertical="8dp"
+            android:paddingEnd="16dp"
+            android:textSize="15sp"
+            android:textColor="#FF6D00"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reporte General de Ventas"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Métricas consolidadas en tiempo real"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Tarjeta Principal: Ingresos Totales -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E1E1E"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💰 INGRESOS TOTALES RECAUDADOS"
+                android:textColor="#B0B0B0"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp"/>
+
+            <TextView
+                android:id="@+id/tvReportTotalRevenue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 0 COP"
+                android:textColor="#FF6D00"
+                android:textSize="28sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Tarjeta: Pedidos y Ticket Promedio -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E1E1E"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📦 VOLUMEN DE PEDIDOS"
+                android:textColor="#B0B0B0"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp"/>
+
+            <TextView
+                android:id="@+id/tvReportOrderCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 pedidos registrados"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/tvReportAverageTicket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ticket promedio: $ 0 COP"
+                android:textColor="#CCCCCC"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <!-- Tarjeta: Método de Pago Más Usado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E1E1E"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💳 PREFERENCIA DE PAGO"
+                android:textColor="#B0B0B0"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp"/>
+
+            <TextView
+                android:id="@+id/tvReportPaymentBreakdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sin datos registrados aún"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <!-- Tarjeta: Estado del Inventario -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E1E1E"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🏍️ RESUMEN DE INVENTARIO"
+                android:textColor="#B0B0B0"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp"/>
+
+            <TextView
+                android:id="@+id/tvReportInventorySummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cargando inventario..."
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

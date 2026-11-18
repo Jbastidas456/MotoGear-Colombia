@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#121212"
+    android:fitsSystemWindows="true"
     android:fillViewport="true">
 
     <LinearLayout
@@ -13,31 +14,54 @@
 
         <!-- Título principal -->
         <TextView
+            android:id="@+id/btnBackProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Volver"
+            android:paddingVertical="8dp"
+            android:paddingEnd="16dp"
+            android:textSize="15sp"
+            android:textColor="#FF6D00"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Perfil de Usuario"
             android:textColor="#FFFFFF"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="20dp"/>
 
-        <!-- Contenedor del Avatar / Foto simulada -->
-        <FrameLayout
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="#1E1E1E"
+        <!-- Avatar / Foto de Perfil -->
+        <ImageView
+            android:id="@+id/ivProfileAvatar"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp">
+            android:background="#1E1E1E"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            android:contentDescription="Foto de perfil"
+            android:layout_marginBottom="8dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="👤"
-                android:textSize="40sp"/>
-        </FrameLayout>
+        <TextView
+            android:id="@+id/btnChangePhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="📷 Cambiar foto de perfil"
+            android:textColor="#FF6D00"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"/>
 
-        <!-- Nombre del Usuario -->
+        <!-- Nombre y Rol -->
         <TextView
             android:id="@+id/tvProfileName"
             android:layout_width="wrap_content"
@@ -57,9 +81,9 @@
             android:textColor="#FF6D00"
             android:textSize="14sp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="32dp"/>
+            android:layout_marginBottom="24dp"/>
 
-        <!-- Sección de Información de Cuenta -->
+        <!-- Formulario Validado de Datos -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +95,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Correo Electrónico"
+                android:text="Correo Electrónico (Verificado)"
                 android:textColor="#B0B0B0"
                 android:textSize="12sp"
                 android:layout_marginBottom="2dp"/>
@@ -83,22 +107,77 @@
                 android:text="cargando@motogear.com.co"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
+                android:layout_marginBottom="14dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre Completo *"
+                android:textColor="#B0B0B0"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/etProfileFullName"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="#121212"
+                android:hint="Ej: Carlos Rodríguez"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="12dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#666666"
                 android:layout_marginBottom="12dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ubicación Predeterminada"
+                android:text="Teléfono Celular (10 dígitos) *"
                 android:textColor="#B0B0B0"
                 android:textSize="12sp"
-                android:layout_marginBottom="2dp"/>
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/etProfilePhone"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="#121212"
+                android:hint="Ej: 3101234567"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:paddingHorizontal="12dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#666666"
+                android:layout_marginBottom="12dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bogotá D.C. / Funza, Cundinamarca"
+                android:text="Dirección Predeterminada de Envío *"
+                android:textColor="#B0B0B0"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/etProfileAddress"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="#121212"
+                android:hint="Ej: Calle 80 # 94 - Bogotá / Funza"
+                android:inputType="textPostalAddress"
+                android:paddingHorizontal="12dp"
                 android:textColor="#FFFFFF"
-                android:textSize="15sp"/>
+                android:textColorHint="#666666"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/btnSaveProfile"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Guardar y Validar Perfil"
+                android:textColor="#FF6D00"
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <!-- Botón de Acceso Rápido a Panel Admin (Oculto para clientes) -->
@@ -112,7 +191,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:visibility="gone"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="4dp"/>
 
         <!-- Botón de Cerrar Sesión -->
         <Button

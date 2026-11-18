@@ -49,6 +49,18 @@ class LocationActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+
+        val uid = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid
+        if (uid != null) {
+            com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                .collection("usuarios").document(uid).get()
+                .addOnSuccessListener { doc ->
+                    val dirGuardada = doc.getString("direccion")
+                    if (!dirGuardada.isNullOrEmpty() && etAddress.text.isEmpty()) {
+                        etAddress.setText(dirGuardada)
+                    }
+                }
+        }
     }
 
     private fun verificarPermisoYObtenerUbicacion() {

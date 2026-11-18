@@ -70,6 +70,12 @@
             android:name=".ProductCrudActivity"
             android:exported="false" />
 
+        <activity android:name=".OrdersHistoryActivity" />
+
+        <activity android:name=".UserManagementActivity" />
+
+        <activity android:name=".SalesReportActivity" />
+
     </application>
 
 </manifest>

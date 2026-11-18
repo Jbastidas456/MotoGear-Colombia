@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="#121212"
     android:fillViewport="true">
 
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:backgroundTint="#1E1E1E"
-            android:text="Gestión de Usuarios (CRUD)"
+            android:text="Gestión de Usuarios"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:layout_marginBottom="10dp"/>
@@ -74,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:backgroundTint="#1E1E1E"
-            android:text="Panel de Productos (CRUD Vendedor)"
+            android:text="Panel de Productos"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:layout_marginBottom="10dp"/>
@@ -87,15 +88,27 @@
             android:text="Historial de Pedidos Recibidos"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
-            android:layout_marginBottom="32dp"/>
+            android:layout_marginBottom="24dp"/>
 
-        <!-- Botón para volver -->
+        <!-- Botón de Perfil y Foto del Administrador -->
+        <Button
+            android:id="@+id/btnAdminProfile"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="👤 Mi Perfil y Foto"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Botón para cerrar sesión -->
         <Button
             android:id="@+id/btnBackToCatalog"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:backgroundTint="#FF6D00"
-            android:text="Volver al Catálogo (Comprador)"
+            android:text="Cerrar Sesión (Administrador)"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:textStyle="bold"/>

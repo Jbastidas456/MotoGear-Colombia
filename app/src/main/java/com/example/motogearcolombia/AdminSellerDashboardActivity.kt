@@ -16,17 +16,17 @@ class AdminSellerDashboardActivity : AppCompatActivity() {
         val btnAdminReports = findViewById<Button>(R.id.btnAdminReports)
         val btnSellerProducts = findViewById<Button>(R.id.btnSellerProducts)
         val btnSellerOrders = findViewById<Button>(R.id.btnSellerOrders)
+        val btnAdminProfile = findViewById<Button>(R.id.btnAdminProfile)
         val btnLogoutAdmin = findViewById<Button>(R.id.btnBackToCatalog)
 
-        // Cambiar el texto del botón naranja a Cerrar Sesión para respetar los roles
         btnLogoutAdmin.text = "Cerrar Sesión (Administrador)"
 
         btnAdminUsers.setOnClickListener {
-            Toast.makeText(this, "Abriendo módulo de Gestión de Usuarios (Admin)", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, UserManagementActivity::class.java))
         }
 
         btnAdminReports.setOnClickListener {
-            Toast.makeText(this, "Generando reporte analítico de ventas...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, SalesReportActivity::class.java))
         }
 
         btnSellerProducts.setOnClickListener {
@@ -34,7 +34,11 @@ class AdminSellerDashboardActivity : AppCompatActivity() {
         }
 
         btnSellerOrders.setOnClickListener {
-            Toast.makeText(this, "Consultando pedidos entrantes...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, OrdersHistoryActivity::class.java))
+        }
+
+        btnAdminProfile.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
         }
 
         // Cierre de sesión real y retorno al Login
