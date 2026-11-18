@@ -18,6 +18,12 @@ import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * Actividad principal de autenticación de MotoGear Colombia.
+ * Gestiona el inicio de sesión con correo/contraseña, registro con validación de rol
+ * de vendedor en Firestore, acceso mediante huella dactilar (BiometricPrompt),
+ * recuperación de contraseña y canal de soporte.
+ */
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
@@ -66,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
                 }
         }
 
-        // 2. REGISTRAR NUEVO USUARIO VALIDANDO CÓDIGO CONTRA FIRESTORE
+        // 2. REGISTRAR NUEVO USUARIO VALIDANDO CÓDIGO DE VENDEDOR CONTRA FIRESTORE
         btnRegister.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
@@ -88,11 +94,11 @@ class LoginActivity : AppCompatActivity() {
                     .addOnSuccessListener { doc ->
                         val codigoValido = doc.getString("codigoAdmin")
                         if (!codigoValido.isNullOrEmpty() && codigoIngresado == codigoValido) {
-                            crearCuentaEnFirebase(email, password, "admin")
+                            crearCuentaEnFirebase(email, password, "vendedor")
                         } else {
                             etAdminCode.error = "Código de autorización inválido"
                             etAdminCode.requestFocus()
-                            Toast.makeText(this, "No tienes autorización para crear cuenta Admin", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "No tienes autorización para crear cuenta de Vendedor", Toast.LENGTH_LONG).show()
                         }
                     }
                     .addOnFailureListener { e ->
@@ -144,6 +150,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Crea la credencial en Firebase Authentication y registra el perfil del usuario
+     * con su rol asignado dentro de la colección 'usuarios' en Cloud Firestore.
+     */
     private fun crearCuentaEnFirebase(email: String, password: String, rolSeleccionado: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { result ->
@@ -169,6 +179,10 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+    /**
+     * Almacena localmente en SharedPreferences el último UID y correo autenticado
+     * para vincular futuros inicios de sesión mediante huella dactilar.
+     */
     private fun guardarUsuarioParaBiometria(uid: String, email: String) {
         val prefs = getSharedPreferences("MotoGearPrefs", Context.MODE_PRIVATE)
         prefs.edit()
@@ -177,6 +191,10 @@ class LoginActivity : AppCompatActivity() {
             .apply()
     }
 
+    /**
+     * Verifica la disponibilidad del sensor biométrico del dispositivo físico y despliega
+     * el diálogo nativo de huella digital para validar la identidad del usuario vinculado.
+     */
     private fun iniciarAutenticacionBiometrica() {
         val prefs = getSharedPreferences("MotoGearPrefs", Context.MODE_PRIVATE)
         val savedUid = prefs.getString("LAST_UID", null)
@@ -238,6 +256,10 @@ class LoginActivity : AppCompatActivity() {
         biometricPrompt.authenticate(promptInfo)
     }
 
+    /**
+     * Consulta en Firestore que el perfil del usuario siga activo y obtiene su rol
+     * ('admin', 'vendedor' o 'cliente'). Si fue eliminado, cierra la sesión inmediatamente.
+     */
     private fun verificarRolYRedirigir(uid: String) {
         db.collection("usuarios").document(uid).get()
             .addOnSuccessListener { documento ->
@@ -258,13 +280,23 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+    /**
+     * Redirige al usuario a la interfaz correspondiente según su rol y envía el tipo de rol
+     * al panel administrativo para restringir permisos entre Administrador y Vendedor.
+     */
     private fun redirigirSegunRol(rol: String) {
-        if (rol == "admin") {
-            Toast.makeText(this, "Bienvenido Administrador", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, AdminSellerDashboardActivity::class.java))
-        } else {
-            Toast.makeText(this, "Bienvenido a MotoGear", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, CatalogActivity::class.java))
+        when (rol) {
+            "admin", "vendedor" -> {
+                val mensaje = if (rol == "admin") "Bienvenido Administrador" else "Bienvenido Vendedor"
+                Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, AdminSellerDashboardActivity::class.java)
+                intent.putExtra("ROL_USUARIO", rol)
+                startActivity(intent)
+            }
+            else -> {
+                Toast.makeText(this, "Bienvenido a MotoGear", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, CatalogActivity::class.java))
+            }
         }
         finish()
     }

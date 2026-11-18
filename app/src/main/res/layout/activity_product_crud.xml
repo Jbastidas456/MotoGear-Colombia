@@ -10,82 +10,148 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="20dp">
 
         <TextView
+            android:id="@+id/tvTituloFormProducto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gestión de Productos"
+            android:text="Gestión de Productos (CRUD)"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="16dp"/>
+
+        <ImageView
+            android:id="@+id/ivPreviewProducto"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="#1E1E1E"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:contentDescription="Vista previa del producto"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="14dp">
+
+            <Button
+                android:id="@+id/btnTomarFoto"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:backgroundTint="#2C2C2C"
+                android:text="Cámara"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"/>
+
+            <Button
+                android:id="@+id/btnSeleccionarGaleria"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:backgroundTint="#2C2C2C"
+                android:text="Galería"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"/>
+        </LinearLayout>
 
         <EditText
             android:id="@+id/etNombre"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:backgroundTint="#333333"
             android:textColor="#FFFFFF"
             android:textColorHint="#AAAAAA"
             android:hint="Nombre del producto"
             android:paddingHorizontal="12dp"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="10dp"/>
 
         <EditText
             android:id="@+id/etDescripcion"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:backgroundTint="#333333"
             android:textColor="#FFFFFF"
             android:textColorHint="#AAAAAA"
             android:hint="Descripción"
             android:paddingHorizontal="12dp"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="10dp"/>
 
         <EditText
             android:id="@+id/etPrecio"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:backgroundTint="#333333"
             android:textColor="#FFFFFF"
             android:textColorHint="#AAAAAA"
-            android:hint="Precio"
+            android:hint="Precio (COP)"
             android:inputType="numberDecimal"
             android:paddingHorizontal="12dp"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="10dp"/>
 
         <EditText
             android:id="@+id/etStock"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:backgroundTint="#333333"
             android:textColor="#FFFFFF"
             android:textColorHint="#AAAAAA"
-            android:hint="Stock"
+            android:hint="Stock disponible"
             android:inputType="number"
             android:paddingHorizontal="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="16dp"/>
 
         <Button
             android:id="@+id/btnGuardarProducto"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="52dp"
             android:backgroundTint="#FF6D00"
             android:text="Guardar Producto"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnCancelarEdicion"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:backgroundTint="#444444"
+            android:text="Cancelar Edición"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp"/>
 
         <Button
             android:id="@+id/btnVolverDashboard"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:backgroundTint="#1E1E1E"
-            android:text="Volver"
+            android:text="Volver al Panel"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inventario Registrado (Toca para editar o eliminar)"
+            android:textColor="#FF6D00"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProductosCrud"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
 
     </LinearLayout>
 </ScrollView>

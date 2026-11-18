@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Registrarme como Administrador / Vendedor"
+            android:text="Registrarme como Vendedor"
             android:textColor="@color/text_white"
             android:buttonTint="@color/accent_orange" />
 
@@ -81,7 +81,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:background="@color/card_dark"
-            android:hint="Código de Autorización Admin"
+            android:hint="Código de Autorización Vendedor"
             android:inputType="textPassword"
             android:paddingHorizontal="16dp"
             android:textColor="@color/text_white"
