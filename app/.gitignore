@@ -1,2 +1,15 @@
 /build
+# Archivos de configuración sensibles de Firebase y credenciales
 google-services.json
+**/google-services.json
+local.properties
+*.jks
+*.keystore
+
+# Archivos generados por Android Studio / Gradle
+.gradle/
+build/
+**/build/
+.idea/
+*.iml
+captures/

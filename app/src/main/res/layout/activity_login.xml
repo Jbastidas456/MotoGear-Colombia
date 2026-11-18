@@ -2,8 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/primary_dark"
+    android:fitsSystemWindows="true"
     android:fillViewport="true">
 
     <LinearLayout
@@ -74,6 +74,20 @@
             android:textColor="@color/text_white"
             android:buttonTint="@color/accent_orange" />
 
+        <!-- Código de Autorización Admin (Oculto por defecto) -->
+        <EditText
+            android:id="@+id/etAdminCode"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/card_dark"
+            android:hint="Código de Autorización Admin"
+            android:inputType="textPassword"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/text_white"
+            android:textColorHint="@color/text_gray"
+            android:visibility="gone" />
+
         <!-- Botón Iniciar Sesión -->
         <Button
             android:id="@+id/btnLogin"
@@ -112,9 +126,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
+            android:paddingVertical="6dp"
             android:text="¿Olvidaste tu contraseña?"
             android:textColor="@color/accent_orange"
             android:textSize="14sp" />
+
+        <!-- Enlace Soporte / Contacto -->
+        <TextView
+            android:id="@+id/tvContactSupport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingVertical="6dp"
+            android:text="¿Eres vendedor o necesitas soporte? Contáctanos"
+            android:textColor="@color/text_gray"
+            android:textSize="13sp" />
 
     </LinearLayout>
 </ScrollView>

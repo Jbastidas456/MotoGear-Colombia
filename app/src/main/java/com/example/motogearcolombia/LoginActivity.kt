@@ -2,12 +2,15 @@ package com.example.motogearcolombia
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -30,10 +33,17 @@ class LoginActivity : AppCompatActivity() {
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val cbIsAdmin = findViewById<CheckBox>(R.id.cbIsAdmin)
+        val etAdminCode = findViewById<EditText>(R.id.etAdminCode)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnRegister = findViewById<Button>(R.id.btnRegister)
         val btnBiometric = findViewById<Button>(R.id.btnBiometric)
         val tvForgotPassword = findViewById<TextView>(R.id.tvForgotPassword)
+        val tvContactSupport = findViewById<TextView>(R.id.tvContactSupport)
+
+        cbIsAdmin.setOnCheckedChangeListener { _, isChecked ->
+            etAdminCode.visibility = if (isChecked) View.VISIBLE else View.GONE
+            if (!isChecked) etAdminCode.text.clear()
+        }
 
         // 1. INICIAR SESIÓN Y VERIFICAR ROL EN FIRESTORE
         btnLogin.setOnClickListener {
@@ -56,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
                 }
         }
 
-        // 2. REGISTRAR NUEVO USUARIO CON ROL (ADMIN O CLIENTE)
+        // 2. REGISTRAR NUEVO USUARIO VALIDANDO CÓDIGO CONTRA FIRESTORE
         btnRegister.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
@@ -66,30 +76,31 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val rolSeleccionado = if (cbIsAdmin.isChecked) "admin" else "cliente"
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener { result ->
-                    val uid = result.user?.uid ?: return@addOnSuccessListener
-                    val datosUsuario = hashMapOf(
-                        "uid" to uid,
-                        "email" to email,
-                        "rol" to rolSeleccionado
-                    )
-
-                    db.collection("usuarios").document(uid).set(datosUsuario)
-                        .addOnSuccessListener {
-                            guardarUsuarioParaBiometria(uid, email)
-                            Toast.makeText(this, "Cuenta creada como $rolSeleccionado", Toast.LENGTH_SHORT).show()
-                            redirigirSegunRol(rolSeleccionado)
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "Error guardando rol: ${e.message}", Toast.LENGTH_LONG).show()
-                        }
+            if (cbIsAdmin.isChecked) {
+                val codigoIngresado = etAdminCode.text.toString().trim()
+                if (codigoIngresado.isEmpty()) {
+                    etAdminCode.error = "Ingresa el código de autorización"
+                    etAdminCode.requestFocus()
+                    return@setOnClickListener
                 }
-                .addOnFailureListener { e ->
-                    Toast.makeText(this, "Error al registrar: ${e.message}", Toast.LENGTH_LONG).show()
-                }
+
+                db.collection("configuracion").document("seguridad").get()
+                    .addOnSuccessListener { doc ->
+                        val codigoValido = doc.getString("codigoAdmin")
+                        if (!codigoValido.isNullOrEmpty() && codigoIngresado == codigoValido) {
+                            crearCuentaEnFirebase(email, password, "admin")
+                        } else {
+                            etAdminCode.error = "Código de autorización inválido"
+                            etAdminCode.requestFocus()
+                            Toast.makeText(this, "No tienes autorización para crear cuenta Admin", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error validando autorización: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                crearCuentaEnFirebase(email, password, "cliente")
+            }
         }
 
         // 3. INICIO DE SESIÓN CON HUELLA / BIOMETRÍA
@@ -97,11 +108,65 @@ class LoginActivity : AppCompatActivity() {
             iniciarAutenticacionBiometrica()
         }
 
-        // Clic en ¿Olvidaste tu contraseña?
+        // 4. RECUPERAR CONTRASEÑA
         tvForgotPassword.setOnClickListener {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
+
+        // 5. CONTACTO Y SOPORTE
+        tvContactSupport.setOnClickListener {
+            val correoSoporte = "josenicolasbastidasromero@gmail.com"
+            val telefonoWhatsapp = "+57 301 617 2070"
+            val ubicacionSede = "Bogotá D.C., Colombia"
+
+            AlertDialog.Builder(this)
+                .setTitle("Contacto MotoGear Colombia")
+                .setMessage(
+                    "Atención al cliente y solicitud de acceso Vendedor:\n\n" +
+                            "Correo: $correoSoporte\n" +
+                            "WhatsApp: $telefonoWhatsapp\n" +
+                            "Sede: $ubicacionSede"
+                )
+                .setPositiveButton("Enviar Correo") { _, _ ->
+                    val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                        data = Uri.parse("mailto:$correoSoporte")
+                        putExtra(Intent.EXTRA_SUBJECT, "Solicitud de Soporte / Acceso MotoGear")
+                    }
+                    try {
+                        startActivity(emailIntent)
+                    } catch (_: Exception) {
+                        Toast.makeText(this, "No hay app de correo configurada", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton("Cerrar", null)
+                .show()
+        }
+    }
+
+    private fun crearCuentaEnFirebase(email: String, password: String, rolSeleccionado: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnSuccessListener { result ->
+                val uid = result.user?.uid ?: return@addOnSuccessListener
+                val datosUsuario = hashMapOf(
+                    "uid" to uid,
+                    "email" to email,
+                    "rol" to rolSeleccionado
+                )
+
+                db.collection("usuarios").document(uid).set(datosUsuario)
+                    .addOnSuccessListener {
+                        guardarUsuarioParaBiometria(uid, email)
+                        Toast.makeText(this, "Cuenta creada como $rolSeleccionado", Toast.LENGTH_SHORT).show()
+                        redirigirSegunRol(rolSeleccionado)
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error guardando rol: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error al registrar: ${e.message}", Toast.LENGTH_LONG).show()
+            }
     }
 
     private fun guardarUsuarioParaBiometria(uid: String, email: String) {
@@ -176,11 +241,20 @@ class LoginActivity : AppCompatActivity() {
     private fun verificarRolYRedirigir(uid: String) {
         db.collection("usuarios").document(uid).get()
             .addOnSuccessListener { documento ->
+                if (!documento.exists()) {
+                    auth.signOut()
+                    Toast.makeText(
+                        this,
+                        "Esta cuenta fue eliminada o deshabilitada por el administrador.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return@addOnSuccessListener
+                }
                 val rol = documento.getString("rol") ?: "cliente"
                 redirigirSegunRol(rol)
             }
             .addOnFailureListener {
-                redirigirSegunRol("cliente")
+                Toast.makeText(this, "Error verificando el perfil de usuario", Toast.LENGTH_SHORT).show()
             }
     }
 
