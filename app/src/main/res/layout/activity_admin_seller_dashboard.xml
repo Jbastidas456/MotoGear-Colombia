@@ -14,24 +14,27 @@
 
         <!-- Título principal -->
         <TextView
+            android:id="@+id/tvDashboardTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Panel de Control (Admin / Vendedor)"
+            android:text="Panel de Control"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
         <TextView
+            android:id="@+id/tvDashboardSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Módulos de gestión y reportes requeridos"
+            android:text="Módulos de gestión y reportes"
             android:textColor="#FF6D00"
             android:textSize="14sp"
             android:layout_marginBottom="24dp"/>
 
         <!-- Sección Administrador -->
         <TextView
+            android:id="@+id/tvAdminSectionHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rol Administrador"
@@ -62,6 +65,7 @@
 
         <!-- Sección Vendedor -->
         <TextView
+            android:id="@+id/tvSellerSectionHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rol Vendedor"
@@ -90,7 +94,7 @@
             android:textSize="14sp"
             android:layout_marginBottom="24dp"/>
 
-        <!-- Botón de Perfil y Foto del Administrador -->
+        <!-- Botón de Perfil y Foto -->
         <Button
             android:id="@+id/btnAdminProfile"
             style="@style/Widget.Material3.Button.OutlinedButton"
@@ -108,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:backgroundTint="#FF6D00"
-            android:text="Cerrar Sesión (Administrador)"
+            android:text="Cerrar Sesión"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:textStyle="bold"/>

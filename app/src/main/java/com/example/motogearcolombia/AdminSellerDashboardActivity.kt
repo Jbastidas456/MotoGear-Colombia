@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -20,6 +21,8 @@ class AdminSellerDashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_seller_dashboard)
 
+        val tvDashboardTitle = findViewById<TextView>(R.id.tvDashboardTitle)
+        val tvAdminSectionHeader = findViewById<TextView>(R.id.tvAdminSectionHeader)
         val btnAdminUsers = findViewById<Button>(R.id.btnAdminUsers)
         val btnAdminReports = findViewById<Button>(R.id.btnAdminReports)
         val btnSellerProducts = findViewById<Button>(R.id.btnSellerProducts)
@@ -30,7 +33,14 @@ class AdminSellerDashboardActivity : AppCompatActivity() {
         val rolRecibido = intent.getStringExtra("ROL_USUARIO")
 
         if (rolRecibido != null) {
-            aplicarPermisosPorRol(rolRecibido, btnAdminUsers, btnAdminReports, btnLogoutAdmin)
+            aplicarPermisosPorRol(
+                rolRecibido,
+                tvDashboardTitle,
+                tvAdminSectionHeader,
+                btnAdminUsers,
+                btnAdminReports,
+                btnLogoutAdmin
+            )
         } else {
             // Respaldo: consulta el rol en Firestore si la actividad se abre sin extra en el Intent
             val uid = FirebaseAuth.getInstance().currentUser?.uid
@@ -38,7 +48,14 @@ class AdminSellerDashboardActivity : AppCompatActivity() {
                 FirebaseFirestore.getInstance().collection("usuarios").document(uid).get()
                     .addOnSuccessListener { doc ->
                         val rolFirestore = doc.getString("rol") ?: "vendedor"
-                        aplicarPermisosPorRol(rolFirestore, btnAdminUsers, btnAdminReports, btnLogoutAdmin)
+                        aplicarPermisosPorRol(
+                            rolFirestore,
+                            tvDashboardTitle,
+                            tvAdminSectionHeader,
+                            btnAdminUsers,
+                            btnAdminReports,
+                            btnLogoutAdmin
+                        )
                     }
             }
         }
@@ -75,21 +92,27 @@ class AdminSellerDashboardActivity : AppCompatActivity() {
     }
 
     /**
-     * Configura la visibilidad de los módulos y la etiqueta de cierre de sesión
+     * Configura la visibilidad de los módulos, encabezados y etiqueta de cierre de sesión
      * según el rol autenticado ('admin' o 'vendedor').
      */
     private fun aplicarPermisosPorRol(
         rol: String,
+        tvDashboardTitle: TextView,
+        tvAdminSectionHeader: TextView,
         btnAdminUsers: Button,
         btnAdminReports: Button,
         btnLogoutAdmin: Button
     ) {
         if (rol == "admin") {
+            tvDashboardTitle.text = "Panel de Control - Administrador"
+            tvAdminSectionHeader.visibility = View.VISIBLE
             btnAdminUsers.visibility = View.VISIBLE
             btnAdminReports.visibility = View.VISIBLE
             btnLogoutAdmin.text = "Cerrar Sesión (Administrador)"
         } else {
             // El Vendedor no puede gestionar usuarios ni ver reportes administrativos
+            tvDashboardTitle.text = "Panel de Control - Vendedor"
+            tvAdminSectionHeader.visibility = View.GONE
             btnAdminUsers.visibility = View.GONE
             btnAdminReports.visibility = View.GONE
             btnLogoutAdmin.text = "Cerrar Sesión (Vendedor)"

@@ -2,11 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permisos de Red y Conectividad -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Permisos de Almacenamiento (Compatibilidad hacia atrás) -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+    <!-- Permisos de Localización GPS -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Permisos de Hardware y Cámara -->
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -20,6 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MotoGearColombia">
 
+        <!-- Actividad Principal / Launcher -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -32,6 +40,7 @@
             </intent-filter>
         </activity>
 
+        <!-- Actividades secundarias (Protegidas con exported=false) -->
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
@@ -72,11 +81,17 @@
             android:name=".ProductCrudActivity"
             android:exported="false" />
 
-        <activity android:name=".OrdersHistoryActivity" />
+        <activity
+            android:name=".OrdersHistoryActivity"
+            android:exported="false" />
 
-        <activity android:name=".UserManagementActivity" />
+        <activity
+            android:name=".UserManagementActivity"
+            android:exported="false" />
 
-        <activity android:name=".SalesReportActivity" />
+        <activity
+            android:name=".SalesReportActivity"
+            android:exported="false" />
 
     </application>
 
